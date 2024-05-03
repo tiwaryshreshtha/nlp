@@ -1,0 +1,18 @@
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, accuracy_score
+import matplotlib.pyplot as plt
+X = [[0, 0], [1, 1], [2, 2], [3, 3], [4, 4]]
+y = [0, 0, 1, 1, 1]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+clf = DecisionTreeClassifier()
+clf.fit(X_train, y_train)
+plt.figure(figsize=(6, 4))
+plot_tree(clf, filled=True, feature_names=['Cell Feature 1', 'Cell Feature 2'], class_names=['Non-cancerous', 'Cancerous'])
+plt.show()
+y_pred = clf.predict(X_test)
+cm = confusion_matrix(y_test, y_pred)
+print("Confusion Matrix:")
+print(cm)
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy Score:", accuracy)
